@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Preview</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0f1114;
+  --card: #1a1d23;
+  --border: #2a2e36;
+  --text: #e8ecf0;
+  --muted: #8b939e;
+  --accent: #c9a84c;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Password Gate */
+#gate {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#gate.hidden { display: none; }
+
+#gate h2 {
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+#gate input {
+  padding: 12px 20px;
+  font-size: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  text-align: center;
+  width: 260px;
+  outline: none;
+}
+
+#gate input:focus { border-color: var(--accent); }
+
+#gate .error {
+  color: #f85149;
+  font-size: 14px;
+  display: none;
+}
+
+/* Main content */
+#content { display: none; }
+#content.visible { display: block; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 200;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* Sections */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+section:last-of-type { border-bottom: none; }
+
+.section-title {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.section-heading {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.section-note {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* Name Options */
+.names-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.name-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.name-card:hover { border-color: var(--accent); }
+
+.name-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.name-card p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Color Palettes */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.palette-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.palette-swatches {
+  display: flex;
+  height: 80px;
+}
+
+.swatch { flex: 1; }
+
+.palette-info {
+  padding: 16px 20px;
+}
+
+.palette-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.palette-colors {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* Logo Grid */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.logo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  aspect-ratio: 3/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.logo-card:hover { border-color: var(--accent); }
+
+.logo-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.logo-placeholder {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.logo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px 6px;
+  background: rgba(21, 27, 35, 0.9);
+  border-radius: 0 0 12px 12px;
+  color: var(--muted);
+}
+
+/* Website Mockups */
+.mockup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.mockup-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.mockup-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #12141a;
+  border-bottom: 1px solid var(--border);
+}
+
+.mockup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.mockup-url {
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 10px;
+}
+
+.mockup-screen {
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #0a0c0f;
+}
+
+.mockup-screen img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.mockup-placeholder {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.mockup-label {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.mockup-desc {
+  padding: 0 20px 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .names-grid, .logo-grid { grid-template-columns: 1fr 1fr; }
+  .mockup-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 28px; }
+  section { padding: 40px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div id="gate">
+  <h2>Enter Access Code</h2>
+  <input type="password" id="passInput" placeholder="•••••••" autofocus>
+  <div class="error" id="passError">Incorrect. Try again.</div>
+</div>
+
+<!-- Main Content (hidden until password entered) -->
+<div id="content">
+
+  <div class="hero">
+    <h1>Brand Preview</h1>
+    <p>Gunsmithing & FFL Business — Name, Colors, Logos & Website Concepts</p>
+  </div>
+
+  <!-- SECTION 1: Name Options -->
+  <section>
+    <div class="section-title">01</div>
+    <div class="section-heading">Name Options</div>
+    <div class="section-note">Which name feels right? Think about how it sounds when you answer the phone, how it looks on a sign, and whether it tells people what you do.</div>
+    <div class="names-grid">
+      <div class="name-card">
+        <h3>Sugar Land Generation Armory</h3>
+        <p>Legacy & Family - highlights the father-son bond</p>
+      </div>
+      <div class="name-card">
+        <h3>Kinship Gunworks & Reloading</h3>
+        <p>Legacy & Family - partnership, craftsmanship</p>
+      </div>
+      <div class="name-card">
+        <h3>Next Round Gunworks</h3>
+        <p>Legacy & Family - next generation + next round. Double meaning.</p>
+      </div>
+      <div class="name-card">
+        <h3>Fort Bend Precision Rifle & Pistol</h3>
+        <p>Precision & Technical - local + capability</p>
+      </div>
+      <div class="name-card">
+        <h3>Sweetwater Ballistics & Armory</h3>
+        <p>Precision & Technical - strong, premium feel</p>
+      </div>
+      <div class="name-card">
+        <h3>Apex Platform Gunsmiths</h3>
+        <p>Precision & Technical - modern, tactical</p>
+      </div>
+      <div class="name-card">
+        <h3>Sugar Creek Armory & Handloading</h3>
+        <p>Heritage & Texas - deep local roots</p>
+      </div>
+      <div class="name-card">
+        <h3>Imperial Precision Gunsmithing</h3>
+        <p>Heritage & Texas - nod to Imperial Sugar history</p>
+      </div>
+      <div class="name-card">
+        <h3>Lone Star Bench & Ballistics</h3>
+        <p>Heritage & Texas - unmistakably Texan</p>
+      </div>
+      <div class="name-card">
+        <h3>Next Round Precision</h3>
+        <p>Broader - guns + laser + 3D print + any custom work</p>
+      </div>
+      <div class="name-card">
+        <h3>Forge & Frame</h3>
+        <p>Broader - forge = creation, frame = gun frames + 3D print frames</p>
+      </div>
+      <div class="name-card">
+        <h3>K&S Precision</h3>
+        <p>Broader - Kendrick & Son, ultra-clean, works on everything</p>
+      </div>
+      <div class="name-card">
+        <h3>Caliber Collective</h3>
+        <p>Broader - "caliber" = guns + "high caliber" = quality. Collective = partnership.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Color Palettes -->
+  <section>
+    <div class="section-title">02</div>
+    <div class="section-heading">Color Palettes</div>
+    <div class="section-note">Each palette sets a different tone. Think: signage, business cards, website, truck wrap.</div>
+    <div class="palette-grid">
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #1B2A4A"></div>
+          <div class="swatch" style="background: #8B1A2B"></div>
+          <div class="swatch" style="background: #C9A84C"></div>
+          <div class="swatch" style="background: #F5F0E8"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Navy / Scarlet / Gold (Primary)</div>
+          <div class="palette-colors">#1B2A4A · #8B1A2B · #C9A84C · #F5F0E8</div>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #1C1C1C"></div>
+          <div class="swatch" style="background: #2D2D2D"></div>
+          <div class="swatch" style="background: #C9A84C"></div>
+          <div class="swatch" style="background: #FFFFFF"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Black & Gold (Tactical Premium)</div>
+          <div class="palette-colors">#1C1C1C · #2D2D2D · #C9A84C · #FFFFFF</div>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #1B2A4A"></div>
+          <div class="swatch" style="background: #3A5A8C"></div>
+          <div class="swatch" style="background: #C9A84C"></div>
+          <div class="swatch" style="background: #0D0D0D"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Navy & Gold on Black (Dark Mode)</div>
+          <div class="palette-colors">#1B2A4A · #3A5A8C · #C9A84C · #0D0D0D</div>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #131921"></div>
+          <div class="swatch" style="background: #232F3E"></div>
+          <div class="swatch" style="background: #FF9900"></div>
+          <div class="swatch" style="background: #FFFFFF"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Dark + Orange CTA (Amazon Pattern)</div>
+          <div class="palette-colors">#131921 · #232F3E · #FF9900 · #FFFFFF</div>
+          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: Amazon (4.5B visits/mo). Dark navy base, orange drives action. Orange CTAs convert 21% better than alternatives. Accessible: colorblind-safe, high contrast.</div>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #000000"></div>
+          <div class="swatch" style="background: #FFFFFF"></div>
+          <div class="swatch" style="background: #FF0000"></div>
+          <div class="swatch" style="background: #282828"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Black + Red Accent (YouTube/X Pattern)</div>
+          <div class="palette-colors">#000000 · #FFFFFF · #FF0000 · #282828</div>
+          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: YouTube (34B visits/mo), X/Twitter. Maximum contrast. ONE bold accent on neutral base. 82% of users prefer dark mode. Red = urgency, passion, action.</div>
+        </div>
+      </div>
+      <div class="palette-card">
+        <div class="palette-swatches">
+          <div class="swatch" style="background: #000000"></div>
+          <div class="swatch" style="background: #FE2C55"></div>
+          <div class="swatch" style="background: #25F4EE"></div>
+          <div class="swatch" style="background: #FFFFFF"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Dark + Dual Neon (TikTok Pattern)</div>
+          <div class="palette-colors">#000000 · #FE2C55 · #25F4EE · #FFFFFF</div>
+          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: TikTok (3.5B visits/mo). Black base + two vibrant complementary pops. Most modern/youthful feel. Stands out in any feed. Bold, memorable, impossible to ignore.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Logo Concepts -->
+  <section>
+    <div class="section-title">03</div>
+    <div class="section-heading">Logo Concepts</div>
+    <div class="section-note">9 concepts. Which direction resonates? We can refine from there.</div>
+    <div class="logo-grid">
+      <!-- Replace with actual logo images: <img src="logos/logo1.png"> -->
+      <div class="logo-card"><img src="logos/01_Sugar_Land_Generation_Armory_v2.png" alt="Sugar Land Generation Armory"><div class="logo-label">Sugar Land Generation Armory</div></div>
+      <div class="logo-card"><img src="logos/02_Kinship_Gunworks_Reloading.png" alt="Kinship Gunworks & Reloading"><div class="logo-label">Kinship Gunworks & Reloading</div></div>
+      <div class="logo-card"><img src="logos/03_Sugar_Land_Ironworks.png" alt="Sugar Land Ironworks"><div class="logo-label">Sugar Land Ironworks</div></div>
+      <div class="logo-card"><img src="logos/04_Fort_Bend_Precision_Rifle_Pistol.png" alt="Fort Bend Precision Rifle & Pistol"><div class="logo-label">Fort Bend Precision Rifle & Pistol</div></div>
+      <div class="logo-card"><img src="logos/05_Sugar_Creek_Gunsmithing.png" alt="Sugar Creek Gunsmithing"><div class="logo-label">Sugar Creek Gunsmithing</div></div>
+      <div class="logo-card"><img src="logos/06_Apex_Platform_Gunsmiths.png" alt="Apex Platform Gunsmiths"><div class="logo-label">Apex Platform Gunsmiths</div></div>
+      <div class="logo-card"><img src="logos/07_Sugar_Creek_Armory_Handloading_v2.png" alt="Sugar Creek Armory & Handloading"><div class="logo-label">Sugar Creek Armory & Handloading</div></div>
+      <div class="logo-card"><img src="logos/08_Imperial_Precision_Gunsmithing_v2.png" alt="Imperial Precision Gunsmithing"><div class="logo-label">Imperial Precision Gunsmithing</div></div>
+      <div class="logo-card"><img src="logos/09_Lone_Star_Bench_Ballistics.png" alt="Lone Star Bench & Ballistics"><div class="logo-label">Lone Star Bench & Ballistics</div></div>
+      <div class="logo-card"><img src="logos/10_Next_Round_Gunworks.png" alt="Next Round Gunworks"><div class="logo-label">Next Round Gunworks</div></div>
+      <div class="logo-card"><img src="logos/11_Next_Round_Precision.png" alt="Next Round Precision"><div class="logo-label">Next Round Precision</div></div>
+      <div class="logo-card"><img src="logos/12_Forge_and_Frame.png" alt="Forge & Frame"><div class="logo-label">Forge & Frame</div></div>
+      <div class="logo-card"><img src="logos/13_Caliber_Collective.png" alt="Caliber Collective"><div class="logo-label">Caliber Collective</div></div>
+      <div class="logo-card"><img src="logos/14_KS_Precision.png" alt="K&S Precision"><div class="logo-label">K&S Precision</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Website Mockups -->
+  <section>
+    <div class="section-title">04</div>
+    <div class="section-heading">Website Concepts</div>
+    <div class="section-note">Two directions side by side. Clean & Professional (white, trustworthy, local biz) vs Bold & Modern (dark, edgy, stands out). Same pages, different energy.</div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Homepage</h3>
+    <div class="mockup-grid">
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com</div></div>
+        <div class="mockup-screen"><img src="mockups/clean_homepage.png" alt="Clean Homepage"></div>
+        <div class="mockup-label">Clean & Professional</div>
+        <div class="mockup-desc">White base, navy accents, trustworthy local business energy.</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com</div></div>
+        <div class="mockup-screen"><img src="mockups/bold_homepage.png" alt="Bold Homepage"></div>
+        <div class="mockup-label">Bold & Modern</div>
+        <div class="mockup-desc">Dark charcoal, orange + blue accents, geometric, edgy.</div>
+      </div>
+    </div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Services</h3>
+    <div class="mockup-grid">
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/services</div></div>
+        <div class="mockup-screen"><img src="mockups/clean_services.png" alt="Clean Services"></div>
+        <div class="mockup-label">Clean & Professional</div>
+        <div class="mockup-desc">Service cards with icons, pricing, easy to scan.</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/services</div></div>
+        <div class="mockup-screen"><img src="mockups/bold_services.png" alt="Bold Services"></div>
+        <div class="mockup-label">Bold & Modern</div>
+        <div class="mockup-desc">Dark cards with glowing accent borders, bold type.</div>
+      </div>
+    </div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Gallery / Portfolio</h3>
+    <div class="mockup-grid">
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/gallery</div></div>
+        <div class="mockup-screen"><img src="mockups/clean_gallery.png" alt="Clean Gallery"></div>
+        <div class="mockup-label">Clean & Professional</div>
+        <div class="mockup-desc">Masonry grid, filter tabs, before/after portfolio.</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/gallery</div></div>
+        <div class="mockup-screen"><img src="mockups/bold_gallery.png" alt="Bold Gallery"></div>
+        <div class="mockup-label">Bold & Modern</div>
+        <div class="mockup-desc">Dark cinematic feel, dramatic before/after shots.</div>
+      </div>
+    </div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Contact Us</h3>
+    <div class="mockup-grid">
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/contact</div></div>
+        <div class="mockup-screen"><img src="mockups/clean_contact.png" alt="Clean Contact"></div>
+        <div class="mockup-label">Clean & Professional</div>
+        <div class="mockup-desc">Contact form + map + hours. "Book an Appointment" CTA.</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/contact</div></div>
+        <div class="mockup-screen"><img src="mockups/bold_contact.png" alt="Bold Contact"></div>
+        <div class="mockup-label">Bold & Modern</div>
+        <div class="mockup-desc">Dark form, dark map, geometric shapes, edgy CTAs.</div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- SECTION 5: Business Setup Checklist -->
+  <section>
+    <div class="section-title">05</div>
+    <div class="section-heading">Business Setup Checklist</div>
+    <div class="section-note">Once we land on name + colors, this is the launch sequence. Roughly in order.</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">Phase 1: Foundation</h4>
+        <div style="font-size: 14px; line-height: 2; color: var(--text);">
+          &#9744; Garage Phase 0 (clear space for workshop)<br>
+          &#9744; Move gym to game room<br>
+          &#9744; Convert golf-cart port to initial shop<br>
+          &#9744; Check HOA deed restrictions (written copy)<br>
+          &#9744; Register DBA with Fort Bend County<br>
+          &#9744; Texas Sales Tax Permit (Comptroller)<br>
+          &#9744; Commercial liability insurance (firearms-specific)<br>
+          &#9744; HOA approval for shed structure<br>
+          &#9744; Shed design + permits + build<br>
+          &#9744; Equipment acquisition (bench, safe, tools)<br>
+          &#9744; FastBound software setup (digital A&D book)<br>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">Phase 2: FFL Application</h4>
+        <div style="font-size: 14px; line-height: 2; color: var(--text);">
+          &#9744; Submit ATF Form 7 (FFL application)<br>
+          &#9744; Background checks (both applicants)<br>
+          &#9744; ATF IOI interview + inspection (~60-90 day wait)<br>
+          &#9744; Receive FFL license<br>
+        </div>
+
+        <h4 style="color: var(--accent); margin: 20px 0 12px; font-size: 15px;">Phase 3: Launch</h4>
+        <div style="font-size: 14px; line-height: 2; color: var(--text);">
+          &#9744; Domain + web hosting (evaluate: Squarespace, WordPress, AWS)<br>
+          &#9744; Business email service (e.g. Google Workspace, Zoho Mail)<br>
+          &#9744; Build website (landing page + services + gallery)<br>
+          &#9744; Google Business Profile (Service Area Business)<br>
+          &#9744; Instagram account<br>
+          &#9744; Facebook page<br>
+          &#9744; YouTube channel<br>
+          &#9744; Register on FFL directories (GunBroker, FFL Scope)<br>
+          &#9744; TexasGunTalk.com sponsor listing<br>
+          &#9744; Business cards for local ranges<br>
+          &#9744; First 10 transfer clients (intro rate)<br>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">Phase 4: Expansion (Year 1+)</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 13px; line-height: 2; color: var(--muted);">
+        <div>
+          &#9744; Cerakote capability<br>
+          &#9744; Hot bluing capability<br>
+          &#9744; Laser engraving services<br>
+          &#9744; 3D printing services<br>
+        </div>
+        <div>
+          &#9744; Precision rifle assembly<br>
+          &#9744; Custom AR upper builds<br>
+          &#9744; Ultrasonic cleaning service<br>
+          &#9744; Optics leveling/torquing<br>
+        </div>
+        <div>
+          &#9744; Type 06/07 FFL upgrade (ammo sales)<br>
+          &#9744; SOT / Class 3 (NFA items)<br>
+          &#9744; Barrel threading<br>
+          &#9744; Action truing / stock bedding<br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="footer">
+    Confidential — For internal review only<br>
+    Last updated: <span id="lastUpdated"></span>
+  </div>
+
+</div>
+
+<script>
+// Simple password gate
+// Change this to whatever word you and yugs agree on
+const ACCESS_CODE = 'bravo47fox';
+
+const gate = document.getElementById('gate');
+const content = document.getElementById('content');
+const passInput = document.getElementById('passInput');
+const passError = document.getElementById('passError');
+
+passInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    if (passInput.value.toLowerCase().trim() === ACCESS_CODE) {
+      gate.classList.add('hidden');
+      content.classList.add('visible');
+    } else {
+      passError.style.display = 'block';
+      passInput.value = '';
+      passInput.focus();
+    }
+  }
+});
+
+// Last updated date
+document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+</script>
+</body>
+</html>
