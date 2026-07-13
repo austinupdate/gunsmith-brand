@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brand Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -123,7 +126,7 @@ section:last-of-type { border-bottom: none; }
 /* Name Options */
 .names-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
 }
 
@@ -139,9 +142,17 @@ section:last-of-type { border-bottom: none; }
 .name-card:hover { border-color: var(--accent); }
 
 .name-card h3 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
+}
+
+.name-card .category {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 6px;
 }
 
 .name-card p {
@@ -186,6 +197,61 @@ section:last-of-type { border-bottom: none; }
   font-family: 'SF Mono', 'Fira Code', monospace;
 }
 
+/* Font Pairings */
+.font-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.font-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.font-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.font-card-header h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.font-card-header .font-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.font-preview-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.font-preview-panel {
+  padding: 24px;
+  border-right: 1px solid var(--border);
+}
+
+.font-preview-panel:last-child {
+  border-right: none;
+}
+
+.font-preview-panel .palette-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
 /* Logo Grid */
 .logo-grid {
   display: grid;
@@ -197,7 +263,7 @@ section:last-of-type { border-bottom: none; }
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  aspect-ratio: 3/3;
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,12 +280,6 @@ section:last-of-type { border-bottom: none; }
   object-fit: contain;
 }
 
-.logo-placeholder {
-  color: var(--muted);
-  font-size: 14px;
-  text-align: center;
-}
-
 .logo-label {
   position: absolute;
   bottom: 0;
@@ -231,6 +291,81 @@ section:last-of-type { border-bottom: none; }
   background: rgba(21, 27, 35, 0.9);
   border-radius: 0 0 12px 12px;
   color: var(--muted);
+}
+
+.tier-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tier-badge.tier1 { background: rgba(201,168,76,0.2); color: var(--accent); }
+.tier-badge.tier2 { background: rgba(100,200,150,0.2); color: #64c896; }
+.tier-badge.tier3 { background: rgba(100,150,255,0.2); color: #6496ff; }
+
+/* Info Cards */
+.info-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.info-card h4 {
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.info-card p, .info-card div {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* Tier System Card */
+.tier-system {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.tier-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.tier-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.tier-card .tier-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.tier-card .tier-uses {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.tier-card .tier-uses strong {
+  color: var(--accent);
 }
 
 /* Website Mockups */
@@ -284,12 +419,6 @@ section:last-of-type { border-bottom: none; }
   object-fit: contain;
 }
 
-.mockup-placeholder {
-  color: var(--muted);
-  font-size: 14px;
-  text-align: center;
-}
-
 .mockup-label {
   padding: 14px 20px;
   font-size: 14px;
@@ -315,6 +444,8 @@ section:last-of-type { border-bottom: none; }
 @media (max-width: 768px) {
   .names-grid, .logo-grid { grid-template-columns: 1fr 1fr; }
   .mockup-grid { grid-template-columns: 1fr; }
+  .tier-system { grid-template-columns: 1fr; }
+  .font-preview-row { grid-template-columns: 1fr; }
   .hero h1 { font-size: 28px; }
   section { padding: 40px 20px; }
 }
@@ -325,7 +456,7 @@ section:last-of-type { border-bottom: none; }
 <!-- Password Gate -->
 <div id="gate">
   <h2>Enter Access Code</h2>
-  <input type="password" id="passInput" placeholder="•••••••" autofocus>
+  <input type="password" id="passInput" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autofocus>
   <div class="error" id="passError">Incorrect. Try again.</div>
 </div>
 
@@ -334,75 +465,65 @@ section:last-of-type { border-bottom: none; }
 
   <div class="hero">
     <h1>Brand Preview</h1>
-    <p>Gunsmithing & FFL Business — Name, Colors, Logos & Website Concepts</p>
+    <p>Gunsmithing & FFL Business &mdash; Name, Colors, Logos & Website Concepts</p>
   </div>
 
   <!-- SECTION 1: Name Options -->
   <section>
     <div class="section-title">01</div>
     <div class="section-heading">Name Options</div>
-    <div class="section-note">Which name feels right? Think about how it sounds when you answer the phone, how it looks on a sign, and whether it tells people what you do.</div>
+    <div class="section-note">8 finalists. Think about how it sounds when you answer the phone, how it looks on a sign, and whether it tells people what you do.</div>
     <div class="names-grid">
       <div class="name-card">
-        <h3>Sugar Land Generation Armory</h3>
-        <p>Legacy & Family - highlights the father-son bond</p>
-      </div>
-      <div class="name-card">
-        <h3>Kinship Gunworks & Reloading</h3>
-        <p>Legacy & Family - partnership, craftsmanship</p>
-      </div>
-      <div class="name-card">
-        <h3>Next Round Gunworks</h3>
-        <p>Legacy & Family - next generation + next round. Double meaning.</p>
-      </div>
-      <div class="name-card">
-        <h3>Fort Bend Precision Rifle & Pistol</h3>
-        <p>Precision & Technical - local + capability</p>
-      </div>
-      <div class="name-card">
-        <h3>Sweetwater Ballistics & Armory</h3>
-        <p>Precision & Technical - strong, premium feel</p>
-      </div>
-      <div class="name-card">
-        <h3>Apex Platform Gunsmiths</h3>
-        <p>Precision & Technical - modern, tactical</p>
-      </div>
-      <div class="name-card">
-        <h3>Sugar Creek Armory & Handloading</h3>
-        <p>Heritage & Texas - deep local roots</p>
-      </div>
-      <div class="name-card">
-        <h3>Imperial Precision Gunsmithing</h3>
-        <p>Heritage & Texas - nod to Imperial Sugar history</p>
-      </div>
-      <div class="name-card">
+        <div class="category">Heritage & Texas</div>
         <h3>Lone Star Bench & Ballistics</h3>
-        <p>Heritage & Texas - unmistakably Texan</p>
+        <p>Unmistakably Texan, established identity</p>
       </div>
       <div class="name-card">
-        <h3>Next Round Precision</h3>
-        <p>Broader - guns + laser + 3D print + any custom work</p>
+        <div class="category">Houston-derivative</div>
+        <h3>HTX Arms Co.</h3>
+        <p>Short, punchy, modern. HTX = Houston identity. Arms = firearms exclusively.</p>
       </div>
       <div class="name-card">
-        <h3>Forge & Frame</h3>
-        <p>Broader - forge = creation, frame = gun frames + 3D print frames</p>
+        <div class="category">Houston-derivative</div>
+        <h3>Bayou City Firearms</h3>
+        <p>Bayou City is Houston's oldest nickname (1836). Firearms is direct and clear.</p>
       </div>
       <div class="name-card">
-        <h3>K&S Precision</h3>
-        <p>Broader - Kendrick & Son, ultra-clean, works on everything</p>
+        <div class="category">Houston-derivative</div>
+        <h3>H-Town Gunworks</h3>
+        <p>Street-level authentic. Gunworks = we build and fix guns.</p>
       </div>
       <div class="name-card">
-        <h3>Caliber Collective</h3>
-        <p>Broader - "caliber" = guns + "high caliber" = quality. Collective = partnership.</p>
+        <div class="category">Houston-derivative</div>
+        <h3>Houston Arms Works</h3>
+        <p>Premium, broader Houston identity. 'Works' = manufacturing heritage.</p>
+      </div>
+      <div class="name-card">
+        <div class="category">Imperial-derivative</div>
+        <h3>Imperial Arms Co.</h3>
+        <p>Ties to Sugar Land's Imperial Sugar history. 'Arms Co.' = established, serious.</p>
+      </div>
+      <div class="name-card">
+        <div class="category">Imperial-derivative</div>
+        <h3>Imperial Gunworks</h3>
+        <p>Sugar Land connection + gunsmithing focus. Premium feel.</p>
+      </div>
+      <div class="name-card">
+        <div class="category">Imperial-derivative</div>
+        <h3>Imperial Firearms</h3>
+        <p>Cleanest, most direct. Imperial = heritage, Firearms = what we do.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: Color Palettes -->
+  <!-- SECTION 2: Colors & Typography -->
   <section>
     <div class="section-title">02</div>
-    <div class="section-heading">Color Palettes</div>
-    <div class="section-note">Each palette sets a different tone. Think: signage, business cards, website, truck wrap.</div>
+    <div class="section-heading">Colors & Typography</div>
+    <div class="section-note">Two palettes + three font pairings. Think: signage, business cards, website, truck wrap, laser engraving.</div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 16px; font-weight: 600;">Color Palettes</h3>
     <div class="palette-grid">
       <div class="palette-card">
         <div class="palette-swatches">
@@ -413,7 +534,7 @@ section:last-of-type { border-bottom: none; }
         </div>
         <div class="palette-info">
           <div class="palette-name">Navy / Scarlet / Gold (Primary)</div>
-          <div class="palette-colors">#1B2A4A · #8B1A2B · #C9A84C · #F5F0E8</div>
+          <div class="palette-colors">#1B2A4A &middot; #8B1A2B &middot; #C9A84C &middot; #F5F0E8</div>
         </div>
       </div>
       <div class="palette-card">
@@ -425,60 +546,80 @@ section:last-of-type { border-bottom: none; }
         </div>
         <div class="palette-info">
           <div class="palette-name">Black & Gold (Tactical Premium)</div>
-          <div class="palette-colors">#1C1C1C · #2D2D2D · #C9A84C · #FFFFFF</div>
+          <div class="palette-colors">#1C1C1C &middot; #2D2D2D &middot; #C9A84C &middot; #FFFFFF</div>
         </div>
       </div>
-      <div class="palette-card">
-        <div class="palette-swatches">
-          <div class="swatch" style="background: #1B2A4A"></div>
-          <div class="swatch" style="background: #3A5A8C"></div>
-          <div class="swatch" style="background: #C9A84C"></div>
-          <div class="swatch" style="background: #0D0D0D"></div>
+    </div>
+
+    <h3 style="color: var(--accent); font-size: 18px; margin: 40px 0 16px; font-weight: 600;">Font Pairings</h3>
+    <div class="font-grid">
+
+      <!-- Font Pairing 1: Classic Authority -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <h4>1. "Classic Authority"</h4>
+          <div class="font-meta">Playfair Display (heading) + Source Sans Pro (body) &mdash; H1: 36px, H2: 28px, Body: 16px &mdash; "Traditional gunsmith meets modern readability."</div>
         </div>
-        <div class="palette-info">
-          <div class="palette-name">Navy & Gold on Black (Dark Mode)</div>
-          <div class="palette-colors">#1B2A4A · #3A5A8C · #C9A84C · #0D0D0D</div>
-        </div>
-      </div>
-      <div class="palette-card">
-        <div class="palette-swatches">
-          <div class="swatch" style="background: #131921"></div>
-          <div class="swatch" style="background: #232F3E"></div>
-          <div class="swatch" style="background: #FF9900"></div>
-          <div class="swatch" style="background: #FFFFFF"></div>
-        </div>
-        <div class="palette-info">
-          <div class="palette-name">Dark + Orange CTA (Amazon Pattern)</div>
-          <div class="palette-colors">#131921 · #232F3E · #FF9900 · #FFFFFF</div>
-          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: Amazon (4.5B visits/mo). Dark navy base, orange drives action. Orange CTAs convert 21% better than alternatives. Accessible: colorblind-safe, high contrast.</div>
-        </div>
-      </div>
-      <div class="palette-card">
-        <div class="palette-swatches">
-          <div class="swatch" style="background: #000000"></div>
-          <div class="swatch" style="background: #FFFFFF"></div>
-          <div class="swatch" style="background: #FF0000"></div>
-          <div class="swatch" style="background: #282828"></div>
-        </div>
-        <div class="palette-info">
-          <div class="palette-name">Black + Red Accent (YouTube/X Pattern)</div>
-          <div class="palette-colors">#000000 · #FFFFFF · #FF0000 · #282828</div>
-          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: YouTube (34B visits/mo), X/Twitter. Maximum contrast. ONE bold accent on neutral base. 82% of users prefer dark mode. Red = urgency, passion, action.</div>
+        <div class="font-preview-row">
+          <div class="font-preview-panel" style="background: #1B2A4A;">
+            <div class="palette-label" style="color: #C9A84C;">Navy/Scarlet/Gold</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #F5F0E8; margin-bottom: 4px;">Imperial Arms Co.</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #C9A84C; margin-bottom: 8px;">Precision Gunsmithing</div>
+            <div style="font-family: 'Source Sans 3', sans-serif; font-size: 16px; color: #F5F0E8; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
+          <div class="font-preview-panel" style="background: #1C1C1C;">
+            <div class="palette-label" style="color: #C9A84C;">Black & Gold</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Imperial Arms Co.</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #C9A84C; margin-bottom: 8px;">Precision Gunsmithing</div>
+            <div style="font-family: 'Source Sans 3', sans-serif; font-size: 16px; color: #FFFFFF; opacity: 0.85; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
         </div>
       </div>
-      <div class="palette-card">
-        <div class="palette-swatches">
-          <div class="swatch" style="background: #000000"></div>
-          <div class="swatch" style="background: #FE2C55"></div>
-          <div class="swatch" style="background: #25F4EE"></div>
-          <div class="swatch" style="background: #FFFFFF"></div>
+
+      <!-- Font Pairing 2: Tactical Modern -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <h4>2. "Tactical Modern"</h4>
+          <div class="font-meta">Oswald (heading) + Inter (body) &mdash; H1: 40px, H2: 30px, Body: 16px &mdash; "Military stencil energy without being literal."</div>
         </div>
-        <div class="palette-info">
-          <div class="palette-name">Dark + Dual Neon (TikTok Pattern)</div>
-          <div class="palette-colors">#000000 · #FE2C55 · #25F4EE · #FFFFFF</div>
-          <div style="font-size:11px; color:#7d8590; margin-top:4px;">Used by: TikTok (3.5B visits/mo). Black base + two vibrant complementary pops. Most modern/youthful feel. Stands out in any feed. Bold, memorable, impossible to ignore.</div>
+        <div class="font-preview-row">
+          <div class="font-preview-panel" style="background: #1B2A4A;">
+            <div class="palette-label" style="color: #C9A84C;">Navy/Scarlet/Gold</div>
+            <div style="font-family: 'Oswald', sans-serif; font-size: 40px; font-weight: 600; color: #F5F0E8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Imperial Arms Co.</div>
+            <div style="font-family: 'Oswald', sans-serif; font-size: 30px; font-weight: 400; color: #C9A84C; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Precision Gunsmithing</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 16px; color: #F5F0E8; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
+          <div class="font-preview-panel" style="background: #1C1C1C;">
+            <div class="palette-label" style="color: #C9A84C;">Black & Gold</div>
+            <div style="font-family: 'Oswald', sans-serif; font-size: 40px; font-weight: 600; color: #FFFFFF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Imperial Arms Co.</div>
+            <div style="font-family: 'Oswald', sans-serif; font-size: 30px; font-weight: 400; color: #C9A84C; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Precision Gunsmithing</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 16px; color: #FFFFFF; opacity: 0.85; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
         </div>
       </div>
+
+      <!-- Font Pairing 3: Texas Heritage -->
+      <div class="font-card">
+        <div class="font-card-header">
+          <h4>3. "Texas Heritage"</h4>
+          <div class="font-meta">Cinzel (heading) + Lato (body) &mdash; H1: 34px, H2: 26px, Body: 16px &mdash; "Engraving/coin energy &mdash; feels like stamped metal."</div>
+        </div>
+        <div class="font-preview-row">
+          <div class="font-preview-panel" style="background: #1B2A4A;">
+            <div class="palette-label" style="color: #C9A84C;">Navy/Scarlet/Gold</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 34px; font-weight: 700; color: #F5F0E8; letter-spacing: 2px; margin-bottom: 4px;">IMPERIAL ARMS CO.</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 26px; font-weight: 600; color: #C9A84C; letter-spacing: 1px; margin-bottom: 8px;">PRECISION GUNSMITHING</div>
+            <div style="font-family: 'Lato', sans-serif; font-size: 16px; color: #F5F0E8; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
+          <div class="font-preview-panel" style="background: #1C1C1C;">
+            <div class="palette-label" style="color: #C9A84C;">Black & Gold</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 34px; font-weight: 700; color: #FFFFFF; letter-spacing: 2px; margin-bottom: 4px;">IMPERIAL ARMS CO.</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 26px; font-weight: 600; color: #C9A84C; letter-spacing: 1px; margin-bottom: 8px;">PRECISION GUNSMITHING</div>
+            <div style="font-family: 'Lato', sans-serif; font-size: 16px; color: #FFFFFF; opacity: 0.85; line-height: 1.5;">Expert firearms repair, custom builds, and FFL transfers serving the greater Houston area since 2026.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -486,98 +627,152 @@ section:last-of-type { border-bottom: none; }
   <section>
     <div class="section-title">03</div>
     <div class="section-heading">Logo Concepts</div>
-    <div class="section-note">9 concepts. Which direction resonates? We can refine from there.</div>
-    <div class="logo-grid">
-      <!-- Replace with actual logo images: <img src="logos/logo1.png"> -->
-      <div class="logo-card"><img src="logos/01_Sugar_Land_Generation_Armory_v2.png" alt="Sugar Land Generation Armory"><div class="logo-label">Sugar Land Generation Armory</div></div>
-      <div class="logo-card"><img src="logos/02_Kinship_Gunworks_Reloading.png" alt="Kinship Gunworks & Reloading"><div class="logo-label">Kinship Gunworks & Reloading</div></div>
-      <div class="logo-card"><img src="logos/03_Sugar_Land_Ironworks.png" alt="Sugar Land Ironworks"><div class="logo-label">Sugar Land Ironworks</div></div>
-      <div class="logo-card"><img src="logos/04_Fort_Bend_Precision_Rifle_Pistol.png" alt="Fort Bend Precision Rifle & Pistol"><div class="logo-label">Fort Bend Precision Rifle & Pistol</div></div>
-      <div class="logo-card"><img src="logos/05_Sugar_Creek_Gunsmithing.png" alt="Sugar Creek Gunsmithing"><div class="logo-label">Sugar Creek Gunsmithing</div></div>
-      <div class="logo-card"><img src="logos/06_Apex_Platform_Gunsmiths.png" alt="Apex Platform Gunsmiths"><div class="logo-label">Apex Platform Gunsmiths</div></div>
-      <div class="logo-card"><img src="logos/07_Sugar_Creek_Armory_Handloading_v2.png" alt="Sugar Creek Armory & Handloading"><div class="logo-label">Sugar Creek Armory & Handloading</div></div>
-      <div class="logo-card"><img src="logos/08_Imperial_Precision_Gunsmithing_v2.png" alt="Imperial Precision Gunsmithing"><div class="logo-label">Imperial Precision Gunsmithing</div></div>
-      <div class="logo-card"><img src="logos/09_Lone_Star_Bench_Ballistics.png" alt="Lone Star Bench & Ballistics"><div class="logo-label">Lone Star Bench & Ballistics</div></div>
-      <div class="logo-card"><img src="logos/10_Next_Round_Gunworks.png" alt="Next Round Gunworks"><div class="logo-label">Next Round Gunworks</div></div>
-      <div class="logo-card"><img src="logos/11_Next_Round_Precision.png" alt="Next Round Precision"><div class="logo-label">Next Round Precision</div></div>
-      <div class="logo-card"><img src="logos/12_Forge_and_Frame.png" alt="Forge & Frame"><div class="logo-label">Forge & Frame</div></div>
-      <div class="logo-card"><img src="logos/13_Caliber_Collective.png" alt="Caliber Collective"><div class="logo-label">Caliber Collective</div></div>
-      <div class="logo-card"><img src="logos/14_KS_Precision.png" alt="K&S Precision"><div class="logo-label">K&S Precision</div></div>
+    <div class="section-note">3-tier logo system with 11 concepts. Kept favorites + new directions based on refined name list.</div>
+
+    <!-- 3-Tier Logo System Explanation -->
+    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 16px; font-weight: 600;">3-Tier Logo System</h3>
+    <div class="tier-system">
+      <div class="tier-card">
+        <h4 style="color: var(--accent);">Tier 1 &mdash; Complex / Full</h4>
+        <div class="tier-desc">Full crest with Colt Walker, crossed ARs, crossed pistols, company name, Texas elements.</div>
+        <div class="tier-uses"><strong>USE:</strong> Website hero, t-shirts, signage, truck wrap, business cards.</div>
+      </div>
+      <div class="tier-card">
+        <h4 style="color: #64c896;">Tier 2 &mdash; Lightweight</h4>
+        <div class="tier-desc">Simplified mark &mdash; Colt Walker silhouette + Texas star only. No text.</div>
+        <div class="tier-uses"><strong>USE:</strong> Laser engraving, stickers, social media avatar, small advertising, embossing.</div>
+      </div>
+      <div class="tier-card">
+        <h4 style="color: #6496ff;">Tier 3 &mdash; Customizable</h4>
+        <div class="tier-desc">Core emblem with swappable center &mdash; for customer builds. Example: center features a Sig, Glock, or S&W logo.</div>
+        <div class="tier-uses"><strong>USE:</strong> Custom work certificates, customer-branded merchandise, partnership materials.</div>
+      </div>
+    </div>
+
+    <!-- KEPT Logos -->
+    <h4 style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">&#x2605; Kept from Original</h4>
+    <div class="logo-grid" style="margin-bottom: 30px;">
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/04_Fort_Bend_Precision_Rifle_Pistol.png" alt="Fort Bend Precision Rifle &amp; Pistol">
+        <div class="logo-label">Fort Bend Precision Rifle & Pistol</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/08_Imperial_Precision_Gunsmithing_v2.png" alt="Imperial Precision Gunsmithing">
+        <div class="logo-label">Imperial Precision Gunsmithing</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/14_KS_Precision.png" alt="K&amp;S Precision">
+        <div class="logo-label">K&amp;S Precision</div>
+      </div>
+    </div>
+
+    <!-- NEW Tier 1 Logos -->
+    <h4 style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">&#x1F195; New &mdash; Tier 1 (Complex)</h4>
+    <div class="logo-grid" style="margin-bottom: 30px;">
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/15_HTX_Arms_Co.png" alt="HTX Arms Co.">
+        <div class="logo-label">HTX Arms Co.</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/16_Bayou_City_Firearms.png" alt="Bayou City Firearms">
+        <div class="logo-label">Bayou City Firearms</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/17_Imperial_Arms.png" alt="Imperial Arms">
+        <div class="logo-label">Imperial Arms</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/19_H_Town_Gunworks.png" alt="H-Town Gunworks">
+        <div class="logo-label">H-Town Gunworks</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/20_Houston_Arms_Works.png" alt="Houston Arms Works">
+        <div class="logo-label">Houston Arms Works</div>
+      </div>
+      <div class="logo-card">
+        <span class="tier-badge tier1">Tier 1</span>
+        <img src="logos/21_Imperial_Gunworks.png" alt="Imperial Gunworks">
+        <div class="logo-label">Imperial Gunworks</div>
+      </div>
+    </div>
+
+    <!-- NEW Tier 2 Logo -->
+    <h4 style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">&#x1F195; New &mdash; Tier 2 (Lightweight)</h4>
+    <div class="logo-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 30px;">
+      <div class="logo-card">
+        <span class="tier-badge tier2">Tier 2</span>
+        <img src="logos/18_Laser_Mark_Colt_Walker.png" alt="Laser/Sticker Mark - Colt Walker">
+        <div class="logo-label">Laser/Sticker Mark &mdash; Colt Walker</div>
+      </div>
+    </div>
+
+    <!-- NEW Tier 3 Logo -->
+    <h4 style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">&#x1F195; New &mdash; Tier 3 (Customizable)</h4>
+    <div class="logo-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 30px;">
+      <div class="logo-card">
+        <span class="tier-badge tier3">Tier 3</span>
+        <img src="logos/22_Customizable_Template.png" alt="Customizable - Sig Example">
+        <div class="logo-label">Customizable &mdash; Sig Example</div>
+      </div>
+    </div>
+
+    <!-- Colt Walker Heritage Card -->
+    <div class="info-card">
+      <h4>&#x1F3AF; Colt Walker Heritage</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <div style="font-size: 13px; color: var(--muted); line-height: 1.8;">
+            <strong style="color: var(--text);">Texas State Firearm:</strong> Colt Walker (1847)<br>
+            <strong style="color: var(--text);">Designed by:</strong> Samuel Colt + Captain Samuel Walker (Texas Ranger)<br>
+            <strong style="color: var(--text);">Specs:</strong> .44 caliber, 4.5 lbs, 9" barrel<br>
+            <strong style="color: var(--text);">Significance:</strong> First military-adopted revolver<br>
+            <strong style="color: var(--text);">Production:</strong> Only ~1,100 ever made<br>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; color: var(--muted); line-height: 1.8;">
+            <strong style="color: var(--text);">Connection:</strong> Texas Rangers and cowboy heritage. The Colt Walker was the weapon that defined the Texas frontier &mdash; carried by Rangers who kept the peace.<br><br>
+            <em style="color: var(--accent);">"Our brand ties to this weapon as our Texas identity anchor."</em>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- SECTION 4: Website Mockups -->
+  <!-- SECTION 4: Website Concepts -->
   <section>
     <div class="section-title">04</div>
     <div class="section-heading">Website Concepts</div>
-    <div class="section-note">Two directions side by side. Clean & Professional (white, trustworthy, local biz) vs Bold & Modern (dark, edgy, stands out). Same pages, different energy.</div>
+    <div class="section-note">Two homepage mockups showing each palette direction. Full multi-page website will be built once name and palette are locked.</div>
 
-    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Homepage</h3>
     <div class="mockup-grid">
       <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com</div></div>
-        <div class="mockup-screen"><img src="mockups/clean_homepage.png" alt="Clean Homepage"></div>
-        <div class="mockup-label">Clean & Professional</div>
-        <div class="mockup-desc">White base, navy accents, trustworthy local business energy.</div>
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">yourgunsmith.com</div></div>
+        <div class="mockup-screen"><img src="mockups/homepage_primary.png" alt="Primary Palette Homepage"></div>
+        <div class="mockup-label">Primary Palette (Navy/Scarlet/Gold)</div>
+        <div class="mockup-desc">Traditional authority. Established, trustworthy, premium local gunsmith energy.</div>
       </div>
       <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com</div></div>
-        <div class="mockup-screen"><img src="mockups/bold_homepage.png" alt="Bold Homepage"></div>
-        <div class="mockup-label">Bold & Modern</div>
-        <div class="mockup-desc">Dark charcoal, orange + blue accents, geometric, edgy.</div>
+        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">yourgunsmith.com</div></div>
+        <div class="mockup-screen"><img src="mockups/homepage_tactical.png" alt="Tactical Premium Homepage"></div>
+        <div class="mockup-label">Tactical Premium Palette (Black/Gold)</div>
+        <div class="mockup-desc">Modern, tactical, high-end. Clean dark UI with gold accents. Stands out in the firearms space.</div>
       </div>
     </div>
 
-    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Services</h3>
-    <div class="mockup-grid">
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/services</div></div>
-        <div class="mockup-screen"><img src="mockups/clean_services.png" alt="Clean Services"></div>
-        <div class="mockup-label">Clean & Professional</div>
-        <div class="mockup-desc">Service cards with icons, pricing, easy to scan.</div>
-      </div>
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/services</div></div>
-        <div class="mockup-screen"><img src="mockups/bold_services.png" alt="Bold Services"></div>
-        <div class="mockup-label">Bold & Modern</div>
-        <div class="mockup-desc">Dark cards with glowing accent borders, bold type.</div>
-      </div>
-    </div>
-
-    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Gallery / Portfolio</h3>
-    <div class="mockup-grid">
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/gallery</div></div>
-        <div class="mockup-screen"><img src="mockups/clean_gallery.png" alt="Clean Gallery"></div>
-        <div class="mockup-label">Clean & Professional</div>
-        <div class="mockup-desc">Masonry grid, filter tabs, before/after portfolio.</div>
-      </div>
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/gallery</div></div>
-        <div class="mockup-screen"><img src="mockups/bold_gallery.png" alt="Bold Gallery"></div>
-        <div class="mockup-label">Bold & Modern</div>
-        <div class="mockup-desc">Dark cinematic feel, dramatic before/after shots.</div>
-      </div>
-    </div>
-
-    <h3 style="color: var(--accent); font-size: 18px; margin: 30px 0 16px; font-weight: 600;">Contact Us</h3>
-    <div class="mockup-grid">
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/contact</div></div>
-        <div class="mockup-screen"><img src="mockups/clean_contact.png" alt="Clean Contact"></div>
-        <div class="mockup-label">Clean & Professional</div>
-        <div class="mockup-desc">Contact form + map + hours. "Book an Appointment" CTA.</div>
-      </div>
-      <div class="mockup-card">
-        <div class="mockup-browser-bar"><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-url">imperialprecision.com/contact</div></div>
-        <div class="mockup-screen"><img src="mockups/bold_contact.png" alt="Bold Contact"></div>
-        <div class="mockup-label">Bold & Modern</div>
-        <div class="mockup-desc">Dark form, dark map, geometric shapes, edgy CTAs.</div>
-      </div>
+    <div class="info-card" style="margin-top: 24px; text-align: center;">
+      <div style="font-size: 14px; color: var(--muted);">&#x1F6A7; Full multi-page website (Services, Gallery, Contact, About) will be built once name and palette are locked.</div>
     </div>
   </section>
 
-  
   <!-- SECTION 5: Business Setup Checklist -->
   <section>
     <div class="section-title">05</div>
@@ -622,7 +817,7 @@ section:last-of-type { border-bottom: none; }
           &#9744; Business cards for local ranges<br>
           &#9744; First 10 transfer clients (intro rate)<br>
           &#9744; Integrate AI Auction Agent into daily business<br>
-          &#9744; AGI Full Library (online, self-paced — both)<br>
+          &#9744; AGI Full Library (online, self-paced &mdash; both)<br>
           &#9744; Glock Gen 5 Plus Armorer (Smyrna, GA)<br>
           &#9744; S&W M&P 2.0 Pistol Armorer (Brownells, IA)<br>
           &#9744; Sig Sauer P-Series Armorer (Epping, NH)<br>
@@ -674,10 +869,10 @@ section:last-of-type { border-bottom: none; }
   <section>
     <div class="section-title">06</div>
     <div class="section-heading">AI Agent Team</div>
-    <div class="section-note">Our digital workforce — runs autonomously so we can focus on the craft. Zero employees, 9 agents. Replaces ~2-3 part-time hires (~$30-50K/yr savings).</div>
+    <div class="section-note">Our digital workforce &mdash; runs autonomously so we can focus on the craft. Zero employees, 9 agents. Replaces ~2-3 part-time hires (~$30-50K/yr savings).</div>
 
     <div style="margin-bottom: 24px;">
-      <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">&#x1F916; Scheduled Agents (run automatically — "runs without us")</h4>
+      <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">&#x1F916; Scheduled Agents (run automatically &mdash; "runs without us")</h4>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
         <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px;">
           <div style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px;">&#128737; Compliance Monitor</div>
@@ -701,7 +896,7 @@ section:last-of-type { border-bottom: none; }
         </div>
         <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px;">
           <div style="font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px;">&#128269; Auction Agent</div>
-          <div style="font-size: 12px; color: var(--muted); line-height: 1.6;">Daily. Monitors GunBroker & gunsmith specials for deals matching our wish list — caliber, price threshold, condition grade. Alerts us before we miss steals.</div>
+          <div style="font-size: 12px; color: var(--muted); line-height: 1.6;">Daily. Monitors GunBroker & gunsmith specials for deals matching our wish list &mdash; caliber, price threshold, condition grade. Alerts us before we miss steals.</div>
         </div>
       </div>
     </div>
@@ -731,10 +926,10 @@ section:last-of-type { border-bottom: none; }
     <div style="margin-top: 24px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 16px;">
       <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 14px;">&#9889; Phased Rollout</h4>
       <div style="font-size: 13px; color: var(--muted); line-height: 1.8;">
-        <strong style="color: var(--text);">Phase 0 (Pre-FFL, now):</strong> Shop Estimator + Content Creator — generate quotes for friends/family, build social presence early.<br>
-        <strong style="color: var(--text);">Phase 1 (FFL Approved, Day 1):</strong> + Compliance Monitor + Customer Follow-Up — legal obligations start immediately.<br>
-        <strong style="color: var(--text);">Phase 2 (First 90 days):</strong> + Inventory Watchdog + Procurement Agent + Auction Agent — stock management becomes real.<br>
-        <strong style="color: var(--text);">Phase 3 (Revenue flowing):</strong> + Revenue Tracker + Marketing Autopilot — scale without hiring.
+        <strong style="color: var(--text);">Phase 0 (Pre-FFL, now):</strong> Shop Estimator + Content Creator &mdash; generate quotes for friends/family, build social presence early.<br>
+        <strong style="color: var(--text);">Phase 1 (FFL Approved, Day 1):</strong> + Compliance Monitor + Customer Follow-Up &mdash; legal obligations start immediately.<br>
+        <strong style="color: var(--text);">Phase 2 (First 90 days):</strong> + Inventory Watchdog + Procurement Agent + Auction Agent &mdash; stock management becomes real.<br>
+        <strong style="color: var(--text);">Phase 3 (Revenue flowing):</strong> + Revenue Tracker + Marketing Autopilot &mdash; scale without hiring.
       </div>
     </div>
 
@@ -804,10 +999,89 @@ section:last-of-type { border-bottom: none; }
     </div>
   </section>
 
+  <!-- SECTION 8: Slate Truck — Business Vehicle -->
+  <section>
+    <div class="section-title">08</div>
+    <div class="section-heading">Slate Truck &mdash; Business Vehicle</div>
+    <div class="section-note">Our mobile shop identity. An EV work truck that doubles as a rolling billboard &mdash; branded, functional, and tax-deductible.</div>
 
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">The Vehicle</h4>
+        <div style="font-size: 13px; line-height: 1.8; color: var(--muted);">
+          <strong style="color: var(--text);">Model:</strong> Slate Blank Slate Pickup (EV)<br>
+          <strong style="color: var(--text);">Base Price:</strong> $24,950<br>
+          <strong style="color: var(--text);">Range:</strong> 205 miles EPA (LFP battery &mdash; charge to 100% daily, zero degradation)<br>
+          <strong style="color: var(--text);">Payload:</strong> 1,550 lbs | <strong style="color: var(--text);">Towing:</strong> 2,000 lbs<br>
+          <strong style="color: var(--text);">Bed:</strong> 5 ft, 35.1 cu ft<br>
+          <strong style="color: var(--text);">Charging:</strong> 240V at home = full overnight (~$6.30) | NACS port = Tesla Supercharger access<br>
+          <strong style="color: var(--text);">Warranty:</strong> 10 yr / 110,000 mi (battery + powertrain)<br>
+          <strong style="color: var(--text);">Made In:</strong> Warsaw, Indiana<br>
+        </div>
 
-<div class="footer">
-    Confidential — For internal review only<br>
+        <h4 style="color: var(--accent); margin: 20px 0 12px; font-size: 15px;">Three Build Options</h4>
+        <div style="font-size: 13px; line-height: 1.8; color: var(--muted);">
+          <strong style="color: var(--text);">Build A &mdash; "Work Truck Essentials" (~$28,400)</strong><br>
+          Bed liner, locking tailgate, toolbox, MOLLE panels, tow hitch, single Navy wrap.<br><br>
+          <strong style="color: var(--text);">Build B &mdash; "Business Daily Driver" (~$32,800) &#x2B50; Recommended</strong><br>
+          Everything in A + audio, roof/bed racks, two-tone wrap (Navy + Scarlet), key fob, lighting upgrades, interior comfort. The "proud to pull up in" build.<br><br>
+          <strong style="color: var(--text);">Build C &mdash; "Loaded Shop Truck" (~$37,200)</strong><br>
+          Everything in B + LED light bar, work lights, all-terrain wheels, bumper upgrades, full multi-panel wrap (Navy/Scarlet/Gold), spare tire carrier, cargo management. Business card on wheels.<br>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: var(--accent); margin-bottom: 12px; font-size: 15px;">Wrap Design & Branding</h4>
+        <div style="font-size: 13px; line-height: 1.8; color: var(--muted);">
+          <strong style="color: var(--text);">Color Palette:</strong><br>
+          &#x25A0; <span style="color: #004481;">&#x2588;&#x2588;</span> Navy Blue (#004481) &mdash; Primary body<br>
+          &#x25A0; <span style="color: #940000;">&#x2588;&#x2588;</span> Scarlet Red (#940000) &mdash; Rocker/lower accents<br>
+          &#x25A0; <span style="color: #FFD500;">&#x2588;&#x2588;</span> Gold (#FFD500) &mdash; Pinstripe + logo<br>
+          &#x25A0; Slate Grey (natural poly) &mdash; Fenders/bumpers (unwrapped)<br><br>
+          <strong style="color: var(--text);">Layout:</strong> Navy body + gold pinstripe at beltline + scarlet rocker panels. Tailgate: Navy background with gold logo. Doors: small gold logo + "Sugar Land, TX"<br><br>
+          <strong style="color: var(--text);">Style:</strong> Subtle branding &mdash; professional, not NASCAR. Gets 100% Year 1 advertising tax deduction while looking clean.<br><br>
+          <strong style="color: var(--text);">Alternatives Under Consideration:</strong><br>
+          &#8226; OD Green / Matte Military (popular in Slate community)<br>
+          &#8226; Matte Black + Gold accents<br>
+          &#8226; Desert Tan / Coyote<br>
+        </div>
+
+        <h4 style="color: var(--accent); margin: 20px 0 12px; font-size: 15px;">Purpose & Tax Strategy</h4>
+        <div style="font-size: 13px; line-height: 1.8; color: var(--muted);">
+          &#8226; ~85% business use (parts runs, customer deliveries, mobile armorer, gun shows)<br>
+          &#8226; LLC-titled &mdash; cleanest tax paper trail<br>
+          &#8226; Section 280F + Bonus Depreciation: <strong style="color: var(--text);">100% recovered in 2 years</strong><br>
+          &#8226; Branded wrap = separate advertising deduction (100% Year 1)<br>
+          &#8226; Monthly cost: ~$800-880 (payment + insurance + charging + care)<br>
+          &#8226; Deductible at 85%: ~$680-750/month<br>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 16px;">
+      <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 14px;">Bed Organization &mdash; Mobile Armorer Kit</h4>
+      <div style="font-size: 13px; color: var(--muted); line-height: 1.8;">
+        &#9744; Locking drawer system (secure firearms + tools in transit)<br>
+        &#9744; Fold-out workbench surface (tailgate or bed-mounted)<br>
+        &#9744; Secure rifle rack (hidden, under tonneau)<br>
+        &#9744; Power supply (battery station or inverter for dremel, lights)<br>
+        &#9744; MOLLE panels for tool organization<br>
+        &#9744; Tonneau cover (hard folding &mdash; security + weather protection)
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 16px;">
+      <h4 style="color: var(--accent); margin-bottom: 8px; font-size: 14px;">Timeline</h4>
+      <div style="font-size: 13px; color: var(--muted); line-height: 1.8;">
+        <strong style="color: var(--text);">Jul-Aug 2026:</strong> Form LLC, get EIN, open biz bank account<br>
+        <strong style="color: var(--text);">Sep 2026:</strong> Pre-order Slate in LLC name ($300 from biz account)<br>
+        <strong style="color: var(--text);">Q1 2027:</strong> Delivery window assigned &mdash; begin financing applications<br>
+        <strong style="color: var(--text);">Mid-2027:</strong> Take delivery, install wrap + ceramic coating<br>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Confidential &mdash; For internal review only<br>
     Last updated: <span id="lastUpdated"></span>
   </div>
 
@@ -815,7 +1089,6 @@ section:last-of-type { border-bottom: none; }
 
 <script>
 // Simple password gate
-// Change this to whatever word you and yugs agree on
 const ACCESS_CODE = 'bravo47fox';
 
 const gate = document.getElementById('gate');
